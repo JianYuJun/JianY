@@ -5,26 +5,54 @@
       <div class="avatar-box">
         <img src="./logo.png">
       </div>
-       <el-form class="login_form">
+       <el-form class="login_form" :model='login' :rules='FromRelus' ref='resetLogin'>
         <!-- 用户名 -->
         <el-form-item prop="username">
-          <el-input ></el-input>
+          <!-- autofocus   自动获得焦点--> 
+          <el-input prefix-icon="iconfont icon-user" autofocus v-model='login.username'></el-input>
         </el-form-item>
         <!-- 密码 -->
         <el-form-item prop="password">
-          <el-input type="password"></el-input>
+          <el-input type="password" prefix-icon="iconfont icon-3702mima" v-model='login.password' ></el-input>
         </el-form-item>
         <!-- 按钮区域 -->
         <el-form-item class="btns">
           <el-button type="primary" >登录</el-button>
-          <el-button type="info" >重置</el-button>
+          <el-button type="info"  @click='del'>重置</el-button>
         </el-form-item>
       </el-form>
     </div>
   </div>
 </template>
 <script>
-export default {};
+export default {
+  data(){
+    return{
+      login:{
+        username:'admin',
+        password:'123456'
+      },
+     FromRelus:{
+         username:[
+               { required: true, message: '请输入用户名称', trigger: 'blur' },
+               { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
+         ],
+        //  required: true, 必填   trigger: 'blur'  失去焦点触发
+         password:[ { required: true, message: '请输入用户密码', trigger: 'blur' },
+               { min: 6, max: 15, message: '长度在 6 到 15 个字符', trigger: 'blur' }
+         ]
+     }
+      
+    }
+   
+  },methods:{
+    del(){
+      this.$refs.resetLogin.resetFields()
+      this.login.username=this.login.password=''
+      // console.log(this)
+    }
+  }
+};
 </script>
 <style lang='less' scoped>
 .login{
