@@ -13,11 +13,13 @@
         </el-form-item>
         <!-- 密码 -->
         <el-form-item prop="password">
-          <el-input type="password" prefix-icon="iconfont icon-3702mima" v-model='login.password' ></el-input>
+          <el-input type="password" prefix-icon="iconfont icon-3702mima"   v-model='login.password' ></el-input>
         </el-form-item>
+        <!-- ------------------------------ -->
+       
         <!-- 按钮区域 -->
         <el-form-item class="btns">
-          <el-button type="primary" >登录</el-button>
+          <el-button type="primary" @click='logins'>登录</el-button>
           <el-button type="info"  @click='del'>重置</el-button>
         </el-form-item>
       </el-form>
@@ -25,6 +27,7 @@
   </div>
 </template>
 <script>
+import { constants } from 'crypto';
 export default {
   data(){
     return{
@@ -32,24 +35,46 @@ export default {
         username:'admin',
         password:'123456'
       },
+      
      FromRelus:{
+      //  用户
          username:[
                { required: true, message: '请输入用户名称', trigger: 'blur' },
                { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
          ],
+        //  密码
         //  required: true, 必填   trigger: 'blur'  失去焦点触发
          password:[ { required: true, message: '请输入用户密码', trigger: 'blur' },
                { min: 6, max: 15, message: '长度在 6 到 15 个字符', trigger: 'blur' }
          ]
-     }
-      
+     },
     }
    
   },methods:{
+    //重置
     del(){
       this.$refs.resetLogin.resetFields()
       this.login.username=this.login.password=''
       // console.log(this)
+    },
+    // 登录
+    logins(){
+      this.$refs.resetLogin.validate(async valid=>{
+        // console.log(valid)    true   false
+        if(!valid) return;
+        // 发送axios
+      const {data:res}= await this.$http.post('login', this.login)
+      // console.log(data)
+      // console.log(res)
+      if(res.meta.status!==200) return this.$message.error('登录失败')
+        // this.$message('登录成功')
+        this.$message(res.meta.msg)
+        // 跳转页面
+        sessionStorage.setItem('token',res.data.token)
+          this.$router.push('/home')
+        
+       
+      })
     }
   }
 };
