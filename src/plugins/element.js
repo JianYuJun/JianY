@@ -1,5 +1,31 @@
 import Vue from 'vue'
-import { Button, Input, Form, FormItem, Message, Container, Header, Aside, Main, Menu, Submenu, MenuItem, } from 'element-ui'
+// 按需引入
+import {
+    Button,
+    Input,
+    Form,
+    FormItem,
+    Message,
+    Container,
+    Header,
+    Aside,
+    Main,
+    Menu,
+    Submenu,
+    MenuItem,
+    Breadcrumb,
+    BreadcrumbItem,
+    Card,
+    Row,
+    Col,
+    Table,
+    TableColumn,
+    Tooltip,
+    Switch,
+    Pagination,
+    Dialog
+
+} from 'element-ui'
 
 Vue
     .use(Button)
@@ -13,5 +39,16 @@ Vue
     .use(Menu)
     .use(Submenu)
     .use(MenuItem)
+    .use(Breadcrumb)
+    .use(BreadcrumbItem)
+    .use(Card)
+    .use(Row)
+    .use(Col)
+    .use(Table)
+    .use(TableColumn)
+    .use(Tooltip)
+    .use(Switch)
+    .use(Pagination)
+    .use(Dialog)
 
 Vue.prototype.$message = Message
