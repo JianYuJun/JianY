@@ -10,7 +10,7 @@
   <el-card>
     <el-row :gutter="20">
       <el-col :span="10" >
-        <el-input placeholder="请输入内容"   clearable @clear='getUserList' v-model='queryInfo.query'>
+        <el-input placeholder="请输入内容" clearable @clear='getUserList' v-model='queryInfo.query'>
            <el-button slot="append" icon="el-icon-search" @click="getUserList"></el-button>
         </el-input>
       </el-col>
@@ -45,23 +45,32 @@
     </el-table-column>
     <el-table-column label="状态">
           <template slot-scope="scope">
-            <el-switch v-model="scope.row.mg_state" @change="userStateChanged(scope.row)">
+            <el-switch v-model="scope.row.mg_state" 
+                       @change="userStateChanged(scope.row)">
             </el-switch>
           </template>
         </el-table-column>
-    
     <el-table-column label="操作" width="175px">
-     <template slot-scope="scope">
+      <template slot-scope="scope">
              <!-- 修改 -->
-            <el-button type="primary" icon="el-icon-edit" size="mini" @click="XiuaddUser(scope.row.id)"></el-button>
+            <el-button type="primary" 
+                       icon="el-icon-edit" 
+                       size="mini" 
+                       @click="XiuaddUser(scope.row.id)"></el-button>
             <!-- 删除 -->
-            <el-button type="danger" icon="el-icon-delete" size="mini" @click="DelUser(scope.row.id)" ></el-button>
-        <el-tooltip class="item" effect="dark" content="分配角色" placement="top-start">
+            <el-button type="danger" 
+                       icon="el-icon-delete" 
+                       size="mini" 
+                       @click="DelUser(scope.row.id)" ></el-button>
+        <el-tooltip class="item" effect="dark" 
+                    content="分配角色" 
+                    placement="top-start">
              <!-- 设置 -->
-            <el-button type="warning" icon="el-icon-setting" size="mini" ></el-button>
+            <el-button type="warning" 
+                       icon="el-icon-setting" 
+                       size="mini" ></el-button>
         </el-tooltip>
-    
-     </template>
+      </template>
     </el-table-column>
   </el-table>
   <!-- 分页功能 -->
@@ -81,39 +90,14 @@
     <!-- page-sizes	每页显示个数选择器的选项设置 -->
     <!-- total	总条目数 -->
     <!-- layout	组件布局，子组件名用逗号分隔 -->
-    <el-dialog
-     title="提示"
-     :visible.sync="dialogVisible"
-     width="50%"
-     @close='addDialogClosed'
-    >
-  <el-form :model="addForm" :rules="addFormRules" ref="addFormRef" label-width="70px">
-        <el-form-item label="用户名" prop="username">
-          <el-input v-model="addForm.username"></el-input>
-        </el-form-item>
-        <el-form-item label="密码" prop="password">
-          <el-input v-model="addForm.password"></el-input>
-        </el-form-item>
-        <el-form-item label="邮箱" prop="email">
-          <el-input v-model="addForm.email"></el-input>
-        </el-form-item>
-        <el-form-item label="手机" prop="mobile">
-          <el-input v-model="addForm.mobile"></el-input>
-        </el-form-item>
-  </el-form>
-  <span slot="footer" class="dialog-footer">
-    <el-button @click="dialogVisible = false">取 消</el-button>
-    <el-button type="primary" @click="addUser">确 定</el-button>
-  </span>
-</el-dialog>
-<!-- 添加用户 -->
-   <el-dialog
+  <!-- 添加用户 -->
+  <el-dialog
      title="添加用户"
      :visible.sync="dialogVisible"
      width="50%"
      @close='addDialogClosed'
     >
-  <el-form :model="addForm" :rules="addFormRules" ref="addFormRef" label-width="70px">
+    <el-form :model="addForm" :rules="addFormRules" ref="addFormRef" label-width="70px">
         <el-form-item label="用户名" prop="username">
           <el-input v-model="addForm.username"></el-input>
         </el-form-item>
@@ -126,20 +110,20 @@
         <el-form-item label="手机" prop="mobile">
           <el-input v-model="addForm.mobile"></el-input>
         </el-form-item>
-  </el-form>
-  <span slot="footer" class="dialog-footer">
-    <el-button @click="dialogVisible = false">取 消</el-button>
-    <el-button type="primary" @click="addUser">确 定</el-button>
-  </span>
+    </el-form>
+    <span slot="footer" class="dialog-footer">
+        <el-button @click="dialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="addUser">确 定</el-button>
+    </span>
+  </el-dialog>
   <!-- 修改用户 -->
-</el-dialog>
    <el-dialog
      title="修改用户"
      :visible.sync="editdialy"
      width="50%"
-      @close='edDialogClosed'
+     @close='edDialogClosed'
      >
-    <el-form :model="edmian" :rules="addFormRules" ref="edFormRef" label-width="70px">
+     <el-form :model="edmian" :rules="addFormRules" ref="edFormRef" label-width="70px">
         <el-form-item label="用户名" prop="username">
           <el-input v-model="edmian.username"  disabled></el-input>
         </el-form-item>
@@ -149,12 +133,12 @@
           <el-form-item label="手机" prop="mobile">
           <el-input v-model="edmian.mobile"></el-input>
         </el-form-item>
-    </el-form>
-  <span slot="footer" class="dialog-footer">
-    <el-button @click="editdialy = false">取 消</el-button>
-    <el-button type="primary" @click="edUserfrom">确 定</el-button>
-  </span>
-</el-dialog>
+     </el-form>
+     <span slot="footer" class="dialog-footer">
+        <el-button @click="editdialy = false">取 消</el-button>
+        <el-button type="primary" @click="edUserfrom">确 定</el-button>
+     </span>
+   </el-dialog>
  
    
   </el-card>
@@ -166,26 +150,21 @@ export default {
      // 验证邮箱的规则
     var checkEmail = (rule, value, cb) => {
       // 验证邮箱的正则表达式
-      const regEmail = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(\.[a-zA-Z0-9_-])+/
-
+         const regEmail = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(\.[a-zA-Z0-9_-])+/
       if (regEmail.test(value)) {
         // 合法的邮箱
         return cb()
       }
-
-      cb(new Error('请输入合法的邮箱'))
+       cb(new Error('请输入合法的邮箱'))
     }
-
-    // 验证手机号的规则
+       // 验证手机号的规则
     var checkMobile = (rule, value, cb) => {
       // 验证手机号的正则表达式
-      const regMobile = /^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/
-
+         const regMobile = /^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/
       if (regMobile.test(value)) {
         return cb()
       }
-
-      cb(new Error('请输入合法的手机号'))
+       cb(new Error('请输入合法的手机号'))
     }
     return{
       users:[],
@@ -243,7 +222,7 @@ export default {
       // 修改用户数据
       edmian:{
 
-          }
+      }
     }
   },
   created(){
@@ -292,9 +271,7 @@ export default {
          this.$message.success('添加成功')
          this.dialogVisible=false
          this.getUserList()
-
      })
-    
    },
   //  修改
    async  XiuaddUser(id){
@@ -314,39 +291,38 @@ export default {
    edUserfrom(){
     //  console.log(1);
       this.$refs.edFormRef.validate( async valid=>{
-         if(!valid) return
-         const {data:res}= await this.$http.put('users/'+ this.edmian.id ,this.edmian)
-        //  console.log(res)
-       if(res.meta.status!==200){
-         this.$message.error('修改失败')
-       }
-         this.$message.success('修改成功')
-         this.editdialy=false
-         this.getUserList()
-
+           if(!valid) return
+           const {data:res}= await this.$http.put('users/'+ this.edmian.id ,this.edmian)
+           //  console.log(res)
+        if(res.meta.status!==200){
+           this.$message.error('修改失败')
+        }
+           this.$message.success('修改成功')
+           this.editdialy=false
+           this.getUserList()
       })
    },
     //  点击删除
-   async DelUser(id){
-     try {
+    async DelUser(id){
+      try {
         await this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'
         })
            const {data:res}= await this.$http.delete('users/'+id)
-        //  console.log(res)
-       if(res.meta.status!==200){
-         this.$message.error('删除失败')
-       }
-         this.$message.success('删除成功')
-        //  this.editdialy=false
-         this.getUserList()
+         //  console.log(res)
+        if(res.meta.status!==200){
+          this.$message.error('删除失败')
+        }
+          this.$message.success('删除成功')
+         //  this.editdialy=false
+          this.getUserList()
       }  
       catch(err){
        this.$message.info('取消删除')
       }
-   }
+    }
   }
 }
 </script>

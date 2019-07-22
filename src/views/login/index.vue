@@ -3,7 +3,7 @@
     <div class="login-box">
       <!-- 头像 -->
       <div class="avatar-box">
-        <img src="./logo.png">
+        <img src="./yue.jpg">
       </div>
       <!--:model='logins'  是绑定我们form表单中需要提交给后台的一个对象 -->
       <!-- :rules='ResultFrom'  是动态绑定的rules，表单验证规则 -->
