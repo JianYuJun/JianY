@@ -32,7 +32,14 @@ import {
     Cascader,
     Alert,
     Tabs,
-    TabPane
+    TabPane,
+    Steps,
+    Step,
+    CheckboxGroup,
+    Checkbox,
+    Upload,
+    Timeline,
+    TimelineItem
 
 } from 'element-ui'
 
@@ -67,5 +74,12 @@ Vue
     .use(Alert)
     .use(Tabs)
     .use(TabPane)
+    .use(Steps)
+    .use(Step)
+    .use(Checkbox)
+    .use(CheckboxGroup)
+    .use(Upload)
+    .use(Timeline)
+    .use(TimelineItem)
 Vue.prototype.$message = Message
 Vue.prototype.$confirm = MessageBox.confirm
