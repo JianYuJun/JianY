@@ -11,6 +11,7 @@ import Params from '../views/home/goods/params/index'
 import List from '../views/home/goods/list/index'
 import Add from '../views/home/goods/add/index'
 import Orders from '../views/home/orders/index'
+import Reports from '../views/home/reports/index'
 
 
 
@@ -55,6 +56,9 @@ const router = new Router({
             }, {
                 path: '/orders',
                 component: Orders
+            }, {
+                path: '/reports',
+                component: Reports
             }]
         }]
     })
